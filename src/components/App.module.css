@@ -1,0 +1,31 @@
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
+  padding: 0 0 50px 0;
+  background-image: url(../img/bg.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+body {
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+  font-family: "Noto Sans", sans-serif;
+}
+h1 {
+  margin: 0;
+  color: #ffffff;
+  /* position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%); */
+  font-size: 56px;
+  text-transform: uppercase;
+}
