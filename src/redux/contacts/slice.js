@@ -1,8 +1,8 @@
 //файл слайсу для контактів
-import { createSelector, createSlice } from "@reduxjs/toolkit";
-import { fetchContacts, addContact, deleteContact } from "./contactsOps";
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchContacts, addContact, deleteContact } from "./operations";
 
-const slice = createSlice({
+const contactsSlice = createSlice({
   name: "contacts",
   initialState: {
     items: [],
@@ -52,18 +52,4 @@ const slice = createSlice({
   },
 });
 
-export const error = (state) => state.contacts.error;
-export const loading = (state) => state.contacts.loading;
-export const contacts = (state) => state.contacts.items;
-export const filterName = (state) => state.filter.name;
-export const filteredContacts = createSelector(
-  [contacts, filterName],
-  (items, textFilter) => {
-    return items.filter((contact) =>
-      contact.name.toLowerCase().includes(textFilter.toLowerCase())
-    );
-  }
-);
-
-// export const { addContact, deleteContact } = slice.actions;
-export default slice.reducer;
+export default contactsSlice.reducer;

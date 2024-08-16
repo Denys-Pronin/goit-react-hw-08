@@ -1,28 +1,55 @@
-import ContactForm from "./ContactForm/ContactForm";
-import SearchBox from "./SearchBox/SearchBox";
-import ContactList from "./ContactList/ContactList";
-import s from "./App.module.css";
+import { Route, Routes } from "react-router-dom";
+import ContactsPage from "../pages/ContactsPage/ContactsPage";
+import "./App.css";
+import HomePage from "../pages/HomePage/HomePage";
+import RegistrationPage from "../pages/RegistrationPage/RegistrationPage";
+import LoginPage from "../pages/LoginPage/LoginPage";
+import Layout from "./Layout";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchContacts } from "../redux/contactsOps";
-import { error, loading } from "../redux/contactsSlice";
+import { getCurrent } from "../redux/auth/operations";
+import { PrivateRoute } from "../Routes/PrivateRoute";
+import { PublicRoute } from "../Routes/PublicRoute";
+import { selectIsRefreshing } from "../redux/auth/selectors";
 
 function App() {
-  const load = useSelector(loading);
-  const err = useSelector(error);
   const dispatch = useDispatch();
+  const isRefreshing = useSelector(selectIsRefreshing);
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(getCurrent());
   }, [dispatch]);
-  return (
-    <div className={s.wrapper}>
-      <h1>Phonebook</h1>
-      <ContactForm />
-      <SearchBox />
-      {load && <h2>Loading...</h2>}
-      {err && <h2>Error</h2>}
-      <ContactList />
+  return isRefreshing ? null : (
+    <div>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route
+            path="contacts"
+            element={
+              <PrivateRoute>
+                <ContactsPage />
+              </PrivateRoute>
+            }
+          />
+        </Route>
+        <Route
+          path="/register"
+          element={
+            <PublicRoute>
+              <RegistrationPage />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <LoginPage />
+            </PublicRoute>
+          }
+        />
+      </Routes>
     </div>
   );
 }

@@ -1,0 +1,15 @@
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
+  padding: 72px 0 50px 0;
+  background-image: url(../../img/bg.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
