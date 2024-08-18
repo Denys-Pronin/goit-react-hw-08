@@ -2,8 +2,20 @@
   color: white;
   text-decoration: none;
   font-weight: 700;
+}
+
+.wrapper {
   position: absolute;
   top: 50%;
   right: 100px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
   transform: translateY(-50%);
+}
+
+.email {
+  padding: 0;
+  margin: 0;
 }
